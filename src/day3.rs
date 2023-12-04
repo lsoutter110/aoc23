@@ -1,8 +1,6 @@
 use aoc_util::*;
 use std::collections::HashMap;
 
-//not 542793, 534477, 538635
-
 pub fn main(filename: &str) {
     println!("Part 1:");
     let gears = part1(filename);
@@ -92,11 +90,6 @@ fn is_part_num(bytes: &Vec<Vec<u8>>, x: usize, y: usize, gears: &mut Vec<(usize,
             }
         }
     }
-    // && !((xr, yr) == (x-1, y) && bytes[yr][xr] as char == '-')
-    // if x > 0 && is_symbol(bytes[y][x-1] as char) { return true; }
-    // if x < bytes[y].len()-1 && is_symbol(bytes[y][x+1] as char) { return true; }
-    // if y > 0 && is_symbol(bytes[y-1][x] as char) { return true; }
-    // if y < bytes.len()-1 && is_symbol(bytes[y+1][x] as char) { return true; }
     return adj;
 }
 

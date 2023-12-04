@@ -1,6 +1,6 @@
 use aoc_util::*;
 
-fn main(filename: &str) {
+pub fn main(filename: &str) {
     println!("Part 1:");
     part1(filename);
     println!("Part 2:");

@@ -1,6 +1,7 @@
 mod day1;
 mod day2;
 mod day3;
+mod day4;
 
 fn main() {
     let mut args = std::env::args();
@@ -23,6 +24,7 @@ fn main() {
         "1" => day1::main(&file[..]),
         "2" => day2::main(&file[..]),
         "3" => day3::main(&file[..]),
+        "4" => day4::main(&file[..]),
         d => println!("Argument error: Unknown day '{d}'"),
     }
 }

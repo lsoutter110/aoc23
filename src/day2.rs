@@ -6,6 +6,7 @@ pub fn main(filename: &str) {
     part1(filename);
     println!("Part 2:");
     part2(filename);
+    part2_prse(filename);
 }
 
 fn part1(filename: &str) {
@@ -86,4 +87,27 @@ fn part2(filename: &str) {
         sum += nums.iter().fold(1, |m, i| m*i);
     }
     println!("Sum is {sum}");
+}
+
+use prse::{self, parse, Parse};
+
+#[derive(Parse,Debug)]
+enum Col {
+    #[prse="{0} red"] R(i32),
+    #[prse="{0} green"] G(i32),
+    #[prse="{0} blue"] B(i32),
+}
+
+fn part2_prse(filename: &str) {
+    let lines = file::read_to_lines(filename);
+
+    for line in lines {
+        let (g, data): (i32, Vec<&str>) = parse!(line, "Game {}: {:; :}");
+        print!("{g} - ");
+        for d in data {
+            let col: Vec<Col> = parse!(d, "{:, :}");
+            print!("{:?} ", col);
+        }
+        println!("");
+    }
 }
