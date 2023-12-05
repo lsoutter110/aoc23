@@ -11,9 +11,9 @@ pub fn main(filename: &str) {
 }
 
 #[derive(Parse,Debug)]
-#[prse = "Card {num}: {winning: :} | {numbers: :}"]
+#[prse = "Card {_num}: {winning: :} | {numbers: :}"]
 struct Card {
-    num: i32,
+    _num: i32,
     winning: Vec<i32>,
     numbers: Vec<i32>,
 }
