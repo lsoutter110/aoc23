@@ -1,11 +1,18 @@
 use aoc_util::{file, string};
 use std::collections::HashMap;
+use std::time::Instant;
 
 pub fn main(filename: &str) {
+    let start = Instant::now();
     println!("Part 1:");
     part1(filename);
+    println!("({:?})", start.elapsed());
+
+    let start = Instant::now();
     println!("Part 2:");
     part2(filename);
+    println!("({:?})", start.elapsed());
+
     part2_prse(filename);
 }
 
