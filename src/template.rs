@@ -3,21 +3,23 @@ use std::time::Instant;
 use prse::{self, Parse, parse, try_parse};
 
 pub fn main(filename: &str) {
-    let start = Instant::now();
     println!("Part 1:");
-    part1(filename);
-    println!("({:?})", start.elapsed());
-
     let start = Instant::now();
+    let result = part1(filename);
+    let elapsed = start.elapsed();
+    println!("{result} ({:?})", elapsed);
+
     println!("Part 2:");
-    part2(filename);
-    println!("({:?})", start.elapsed());
+    let start = Instant::now();
+    let result = part2(filename);
+    let elapsed = start.elapsed();
+    println!("{result} ({:?})", elapsed);
 }
 
-fn part1(filename: &str) {
+fn part1(filename: &str) -> i64 {
 
 }
 
-fn part2(filename: &str) {
+fn part2(filename: &str) -> i64 {
 
 }
