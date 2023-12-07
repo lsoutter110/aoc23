@@ -1,9 +1,11 @@
+#![allow(unused_imports)]
 mod day1;
 mod day2;
 mod day3;
 mod day4;
 mod day5;
 mod day6;
+mod day7;
 
 fn main() {
     let mut args = std::env::args();
@@ -29,6 +31,7 @@ fn main() {
         "4" => day4::main(&file[..]),
         "5" => day5::main(&file[..]),
         "6" => day6::main(&file[..]),
+        "7" => day7::main(&file[..]),
         d => println!("Argument error: Unknown day '{d}'"),
     }
 }
