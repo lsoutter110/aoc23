@@ -50,20 +50,27 @@ struct Hand {
 }
 
 const CARD_ORDER: &'static str = "23456789TJQKA";
+const CARD_ORDER2: &'static str = "J23456789TQKA";
 
 impl Hand {
-    fn new(cards: String, bid: i64) -> Hand {
-        let strength = Hand::calculate_strength(&cards[..]);
+    fn new(cards: String, bid: i64, joker: bool) -> Hand {
+        let strength = Hand::calculate_strength(&cards[..], joker);
         return Hand { cards, bid, strength };
     }
 
-    fn calculate_strength(cards: &str) -> usize {
+    fn calculate_strength(cards: &str, joker: bool) -> usize {
         // Find type
         let mut occur = [0; CARD_ORDER.len()];
+        let mut jokers = 0;
         for c in cards.chars() {
-            occur[CARD_ORDER.find(c).unwrap()] += 1;
+            match (joker, c) {
+                (true, 'J') => jokers += 1,
+                (true, _) => occur[CARD_ORDER2.find(c).unwrap()] += 1,
+                (false, _) => occur[CARD_ORDER.find(c).unwrap()] += 1,
+            }
         }
         occur.sort_by(|a, b| b.cmp(a));
+        occur[0] += jokers;
         let hand_type = match (occur[0], occur[1]) {
             (5, _) => HandType::FiveKind,
             (4, _) => HandType::FourKind,
@@ -77,7 +84,7 @@ impl Hand {
         // Calculate strength
         let mut strength = hand_type as usize;
         for c in cards.chars() {
-            strength = strength*CARD_ORDER.len() + CARD_ORDER.find(c).unwrap();
+            strength = strength*CARD_ORDER.len() + (if joker { CARD_ORDER2 } else { CARD_ORDER }).find(c).unwrap();
         }
         return strength;
     }
@@ -125,12 +132,19 @@ impl std::cmp::Ord for Hand {
 fn part1(filename: &str) -> i64 {
     let mut hands: Vec<Hand> = file::read_to_lines(filename).iter().map(|l| {
         let (cards, bid) = parse!(l, "{} {}");
-        Hand::new(cards, bid)
+        Hand::new(cards, bid, false)
     }).collect();
     hands.sort_unstable();
     return hands.iter().enumerate().map(|(i,h)| (i+1) as i64 * h.bid).sum();
 }
 
 fn part2(filename: &str) -> i64 {
-    0
+    let mut hands: Vec<Hand> = file::read_to_lines(filename).iter().map(|l| {
+        let (cards, bid) = parse!(l, "{} {}");
+        Hand::new(cards, bid, true)
+    }).collect();
+    hands.sort_unstable();
+    return hands.iter().enumerate().map(|(i,h)| (i+1) as i64 * h.bid).sum();
 }
+
+// too low 248640391
