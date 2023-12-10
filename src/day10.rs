@@ -92,7 +92,6 @@ fn part2(filename: &str) -> i64 {
         (_,true,_,true) => 's',
         _ => panic!("Unrecognised start!"),
     };
-    //  = last_corner;
 
     //replace pipe with 'S's
     loop {
@@ -107,14 +106,6 @@ fn part2(filename: &str) -> i64 {
             'S'|'s' => break,
             _ => panic!("Unknown tile!"),
         };
-        // let ignore_vert = match (last_corner, plane[pos]) {
-        //     ('L','J')|('J','L')|('F','7')|('7','F') => false,
-        //     _ => true,
-        // } && (last == pos.left() || last == pos.right());
-        // // println!("{ignore_vert}, ({last_corner}, {})", plane[pos]);
-        // if let 'L'|'J'|'7'|'F' = plane[pos] {
-        //     last_corner = plane[pos];
-        // }
         if let 'L'|'J'|'|' = plane[pos]{
             plane[pos] = 'S'; //replace verticals
         } else {
@@ -128,14 +119,12 @@ fn part2(filename: &str) -> i64 {
     for y in 0..plane.height {
         let mut inside = false;
         for x in 0..plane.width {
-            print!("{}", plane[(x,y)]);
             if plane[(x,y)] == 'S' {
                 inside = !inside;
             } else if inside && plane[(x,y)] != 's' {
                 count += 1;
             }
         }
-        println!("");
     }
     return count;
 }
