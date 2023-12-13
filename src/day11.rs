@@ -62,7 +62,7 @@ fn part1(filename: &str) -> i64 {
 }
 
 fn part2(filename: &str) -> i64 {
-    let mut plane = file::read_to_char_plane(filename);
+    let plane = file::read_to_char_plane(filename);
     //insert space
     let mut rowr: i64 = 0;
     let mut row_index = Vec::new();
