@@ -55,7 +55,7 @@ fn part1(filename: &str) -> i64 {
     let mut sum = 0;
     for a in &galaxies {
         for b in &galaxies {
-            sum += (i32::abs(a.x-b.x)+i32::abs(a.y-b.y)) as i64;
+            sum += i64::abs(a.x as i64-b.x as i64)+i64::abs(a.y as i64-b.y as i64);
         }
     }
     return sum/2;
